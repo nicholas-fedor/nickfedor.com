@@ -13,4 +13,4 @@ As a long-time computer enthusiast, this website is dedicated towards sharing my
 
 Thank you!
 
-![About Page Feature Image](../images/about/feature-image.jpg)
+![About Page Feature Image](/images/about/feature-image.jpg)
