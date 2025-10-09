@@ -1,0 +1,69 @@
+baseURL = "https://nickfedor.com/"
+languageCode = "en-us"
+title = "Nick Fedor"
+theme = "papermod"
+
+[params]
+description = "Personal website of Nick Fedor"
+showReadingTime = true
+showToc = true
+showCodeCopyButtons = true
+
+search = true
+share = true
+showBreadCrumbs = true
+showWordCount = true
+showPostNavLinks = true
+showRelatedPosts = true
+defaultTheme = "dark"
+disableThemeToggle = true
+
+[[params.socialIcons]]
+name = "twitter"
+url = "https://twitter.com/NickFedor_"
+
+[[params.socialIcons]]
+name = "reddit"
+url = "https://www.reddit.com/user/nick_fedor/"
+
+[[params.socialIcons]]
+name = "github"
+url = "https://github.com/nicholas-fedor/"
+
+[[params.socialIcons]]
+name = "linkedin"
+url = "https://www.linkedin.com/in/nick-fedor/"
+
+[markup.goldmark.renderer]
+unsafe = true
+
+[params.assets]
+customCSS = ["css/custom.css"]
+[[menu.main]]
+name = "Home"
+url = "/"
+weight = 1
+
+[[menu.main]]
+name = "Blog"
+url = "/blog/"
+weight = 2
+
+[[menu.main]]
+name = "Projects"
+url = "/projects/"
+weight = 3
+
+[[menu.main]]
+name = "Websites"
+url = "/websites/"
+weight = 4
+
+[[menu.main]]
+name = "About"
+url = "/about/"
+weight = 5
+
+[caches]
+[caches.images]
+dir = ':cacheDir/images'

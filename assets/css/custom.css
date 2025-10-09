@@ -1,0 +1,132 @@
+:root {
+    --main-width: 1024px;
+    --header-height: 90px;
+}
+
+body {
+    padding-top: var(--header-height);
+}
+
+.list {
+    background-image: url('/images/site/eso0932a-6000x2523.png') !important;
+    background-size: cover !important;
+    background-attachment: scroll !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+
+}
+
+body:not(.list) {
+    background-image: url('/images/site/eso0932a-6000x2523.png') !important;
+    background-size: cover !important;
+    background-attachment: scroll !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+
+}
+body.list {
+    background-color: rgba(0,0,0,0.2);
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    height: var(--header-height);
+}
+
+section.recent-posts {
+    padding: var(--gap);
+}
+
+.nav {
+    position: relative;
+    align-items: center;
+    /* margin-top: 30px; */
+}
+
+.logo {
+    font-size: 40px;
+}
+.logo a img, .logo a svg {
+    transform: translate(0, -5%);
+}
+
+.post-entry,
+.first-entry,
+.content,
+.post-content,
+.recent-posts,
+.header,
+.post-single,
+.list {
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(1px);
+}
+
+.post-single,
+.recent-posts {
+    padding: var(--gap);
+}
+
+.post-entry {
+    padding: var(--gap);
+    border: none;
+    border-radius: 0;
+}
+
+.first-entry {
+    padding: var(--gap);
+}
+a {
+    text-shadow: 0 1px 2px rgba(0,0,0,0.7);
+}
+body:not(.list) code {
+    background: rgba(0,0,0,0.6);
+}
+
+.recent-posts ul {
+    margin-left: 20px;
+}
+
+/* Standardized padding for text elements */
+.post-content ul, .post-content ol {
+    padding-inline-start: 16px;
+}
+
+.post-content blockquote {
+    padding: 8px 16px;
+}
+
+.post-content code {
+    padding: 2px 4px;
+}
+
+.post-content pre code {
+    padding: 12px;
+}
+
+.post-content table th, .post-content table td {
+    padding: 8px 12px;
+}
+
+.post-content dd {
+    padding-inline-start: 16px;
+}
+
+@media (max-width: 767px) {
+    :root {
+        --header-height: 80px;
+    }
+    .logo {
+        font-size: 32px;
+    }
+}
+
+/* Remove glassy overlay from homepage h2 */
+html body#top.list.dark main.main div.post-content {
+    background: transparent;
+    backdrop-filter: none;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.7);
+}
