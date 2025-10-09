@@ -8,11 +8,12 @@ body {
 }
 
 body:not(.list) {
-    background-image: url('/images/site/eso0932a-6000x2523.png') !important;
+    background-image: url('../images/site/eso0932a-6000x2523.png') !important;
     background-size: cover !important;
     background-attachment: scroll !important;
     background-repeat: no-repeat !important;
     background-position: center !important;
+    background-color: transparent !important;
 }
 
 body.list {
@@ -20,11 +21,12 @@ body.list {
 }
 
 .list {
-    background-image: url('/images/site/eso0932a-6000x2523.png') !important;
+    background-image: url('../images/site/eso0932a-6000x2523.png') !important;
     background-size: cover !important;
     background-attachment: scroll !important;
     background-repeat: no-repeat !important;
     background-position: center !important;
+    background-color: transparent !important;
 }
 
 .header {
@@ -33,12 +35,17 @@ body.list {
     width: 100%;
     z-index: 1000;
     height: var(--header-height);
+    backdrop-filter: blur(1px);
+    background: rgb(0, 0, 0);
 }
 
 .nav {
     position: relative;
     align-items: center;
-    /* margin-top: 30px; */
+}
+
+html body#top.list.dark header.header nav.nav {
+    margin-bottom: 30px;
 }
 
 .logo {

@@ -39,6 +39,11 @@ unsafe = true
 
 [params.assets]
 customCSS = ["css/custom.css"]
+favicon = "favicon.ico"
+
+[params.label]
+icon = "images/logo/logo.png"
+iconHeight = 40
 [[menu.main]]
 name = "Home"
 url = "/"

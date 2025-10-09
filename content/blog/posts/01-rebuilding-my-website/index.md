@@ -4,7 +4,7 @@ date: 2025-04-17
 draft: false
 slug: "rebuilding-my-website"
 ---
-![Banner](/images/posts/01-rebuilding-my-website/ghost-logo-light.png)
+![Banner](../images/posts/01-rebuilding-my-website/ghost-logo-light.png)
 
 As of late October 2024, I decided to take a leap of faith and invest in building a website using [Ghost](https://ghost.org) hosted on [Digital Ocean](https://m.do.co/c/c015e918f625).
 
