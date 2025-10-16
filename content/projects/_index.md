@@ -8,6 +8,7 @@ Check out the following projects that I am currently developing and maintaining.
 
 ## Personal Projects
 
+- [goUpdater](https://github.com/nicholas-fedor/goupdater) -  A simple CLI tool for updating Go
 - [Touch](https://github.com/nicholas-fedor/touch) - A cross-platform port of [GNU's Touch](https://www.gnu.org/software/coreutils/manual/html_node/touch-invocation.html#touch-invocation) program.
 - [Go Binary Remover](https://github.com/nicholas-fedor/go-remove) - A cross-platform CLI tool for removing Go binaries.
 - [Cloudflare API Token Generator](https://github.com/nicholas-fedor/goGenerateCFToken) - A cross-platform CLI tool for generating [Cloudflare](https://www.cloudflare.com/) API tokens.
