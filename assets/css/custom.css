@@ -8,7 +8,7 @@ body {
 }
 
 body:not(.list) {
-    background-image: url('../images/site/eso0932a-6000x2523.png') !important;
+    background-image: url('../images/site/background.png') !important;
     background-size: cover !important;
     background-attachment: scroll !important;
     background-repeat: no-repeat !important;
@@ -21,7 +21,7 @@ body.list {
 }
 
 .list {
-    background-image: url('../images/site/eso0932a-6000x2523.png') !important;
+    background-image: url('../images/site/background.png') !important;
     background-size: cover !important;
     background-attachment: scroll !important;
     background-repeat: no-repeat !important;

@@ -170,7 +170,7 @@ Example menu configuration:
 
 - Custom styles are in `assets/css/custom.css`.
 - Current customizations include:
-  - Space-themed background image (`eso0932a-6000x2523.png`) applied site-wide with cover sizing.
+  - Space-themed background image `background.png` (full-size: `eso0932a-6000x2523.png`) applied site-wide with cover sizing.
   - Fixed header height (90px).
   - Semi-transparent backgrounds (`rgba(0,0,0,0.4)`) with blur effects for content areas.
   - Overrides for padding, borders, and positioning to maintain a dark aesthetic.
