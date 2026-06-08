@@ -1,0 +1,44 @@
+{{ define "main" }}
+<div class="home-background">
+<div class="hx:mx-auto hx:flex hextra-max-page-width">
+    {{ partial "sidebar.html" (dict "context" . "disableSidebar" true
+    "displayPlaceholder" true) }}
+
+    <article class="hx:w-full hx:break-words hx:flex hx:min-h-[calc(100vh-var(--navbar-height))] hx:min-w-0 hx:justify-center hx:pb-8 hx:pr-[calc(env(safe-area-inset-right)-1.5rem)]">
+        <main
+            id="content"
+            class="hx:w-full hx:min-w-0 hextra-max-content-width hx:px-6 hx:pt-4 hx:md:px-12"
+        >
+            {{/* Hero section */}}
+            <div class="home-hero">
+                <div class="hx:relative hx:z-10 hx:text-center hx:px-6 hx:py-4">
+                    <h1 class="hx:text-4xl hx:font-bold hx:tracking-tight hx:mb-2 hx:text-white">
+                        Nick Fedor
+                    </h1>
+                    <p class="hx:text-lg hx:max-w-[42ch] hx:mx-auto hx:text-white">
+                        My personal site for
+                        <p>
+                            Homelab • Self-Hosting • Tech • Building Things
+                        </p>
+                    </p>
+                </div>
+            </div>
+
+            {{/* Recent posts grid */}}
+            <h2 class="hx:text-xl hx:font-semibold hx:mb-3 hx:text-slate-900 hx:dark:text-slate-100">
+                Recent Posts
+            </h2>
+            {{ partial "recent-posts-cards.html" . }}
+            <div class="hx:mt-6 hx:text-sm">
+                <a
+                    href="/blog"
+                    class="hx:text-primary-600 hx:dark:text-primary-400 hx:hover:underline"
+                >
+                    View all posts →
+                </a>
+            </div>
+        </main>
+    </article>
+</div>
+</div>
+{{ end }}

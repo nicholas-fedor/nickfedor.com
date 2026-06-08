@@ -1,0 +1,247 @@
+/* Custom homepage styles */
+
+/* Signal to the browser and Dark Reader that this is a dark-only site */
+:root {
+  color-scheme: dark;
+}
+
+/* Homepage background image with color overlay.
+   Scoped to .home-background so it only applies to the homepage.
+   Uses transparent background-color to prevent Dark Reader from
+   injecting a dark overlay on top of the image. */
+.home-background {
+  background-color: transparent !important;
+  background-image:
+    linear-gradient(rgba(30, 41, 59, 0.2), rgba(30, 41, 59, 0.2)),
+    url("/images/background.png") !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: scroll !important;
+}
+
+/* Hero section with glass effect */
+.home-hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
+  margin-bottom: 2rem;
+  padding: 2rem 1.5rem;
+  overflow: hidden;
+  border-radius: 0.375rem;
+  color: white;
+}
+
+.home-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(241, 245, 249, 0.08);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.375rem;
+  z-index: 0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark scrim overlay to compress background luminance range
+   and ensure text contrast over the bright galactic center */
+.home-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 10, 10, 0.25) 0%,
+    rgba(10, 10, 10, 0.12) 40%,
+    rgba(10, 10, 10, 0.25) 100%
+  );
+  z-index: 0;
+  pointer-events: none;
+}
+
+.dark .home-hero::before {
+  background-color: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+}
+
+/* Text shadow for improved legibility over variable background */
+.home-hero h1 {
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.home-hero p {
+    color: rgb(255, 255, 255);
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.45);
+}
+
+/* Footer: compact */
+.hextra-footer .hextra-custom-footer {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.hextra-footer > div:last-child {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.hextra-footer > div:last-child > div {
+    gap: 0.25rem;
+}
+
+.hextra-footer .hx\:mt-6 {
+    margin-top: 0.25rem !important;
+}
+
+/* Card glassmorphism */
+.hextra-card {
+  position: relative;
+  background-color: rgba(17, 17, 17, 0.4) !important;
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 0.375rem !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dark .hextra-card {
+  background-color: rgba(17, 17, 17, 0.5) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.25);
+}
+
+.hextra-card:hover {
+  background-color: rgba(17, 17, 17, 0.5) !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.18);
+}
+
+.dark .hextra-card:hover {
+  background-color: rgba(17, 17, 17, 0.6) !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.35);
+}
+
+/* Card grid: explicit columns per breakpoint */
+.hextra-cards {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .hextra-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .hextra-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Card banner image */
+.hextra-card .hextra-card-banner {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 0.75rem 0.75rem 0;
+}
+
+.hextra-card .hextra-card-banner img {
+  display: block;
+  border-radius: 0.25rem;
+}
+
+/* Card title */
+.hextra-card .hextra-card-title {
+    font-size: 0.9375rem;
+    line-height: 1.4;
+    color: rgb(51, 65, 85);
+}
+
+.dark .hextra-card .hextra-card-title {
+    color: rgb(241, 245, 249);
+}
+
+/* Card date */
+.hextra-card .hextra-card-date {
+    letter-spacing: 0.025em;
+    color: rgb(100, 116, 139);
+}
+
+.dark .hextra-card .hextra-card-date {
+    color: rgb(180, 194, 214);
+}
+
+/* Card subtitle / summary */
+.hextra-card .hextra-card-subtitle {
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: rgb(148, 163, 184);
+}
+
+.dark .hextra-card .hextra-card-subtitle {
+    color: rgb(203, 213, 225) !important;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .home-hero {
+    min-height: 240px;
+    margin-bottom: 1.25rem;
+  }
+}
+
+/* Fallback for browsers without backdrop-filter support (~4%).
+   Provides a solid dark background so text remains readable. */
+@supports not (
+  (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))
+) {
+  .home-hero::before {
+    background-color: rgba(10, 10, 10, 0.9);
+  }
+
+  .hextra-card {
+    background-color: rgba(10, 10, 10, 0.9) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  }
+
+  .dark .hextra-card {
+    background-color: rgba(10, 10, 10, 0.93) !important;
+  }
+}
+
+/* Respect user preference for reduced transparency.
+   Replaces glass effect with near-opaque surfaces. */
+@media (prefers-reduced-transparency: reduce) {
+  .home-hero::before {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background-color: rgba(10, 10, 10, 0.93);
+  }
+
+  .home-hero::after {
+    background: rgba(10, 10, 10, 0.75);
+  }
+
+  .hextra-card {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background-color: rgba(10, 10, 10, 0.93) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  }
+
+  .dark .hextra-card {
+    background-color: rgba(10, 10, 10, 0.95) !important;
+  }
+
+  .hextra-card:hover {
+    background-color: rgba(10, 10, 10, 0.95) !important;
+  }
+
+  .dark .hextra-card:hover {
+    background-color: rgba(10, 10, 10, 0.98) !important;
+  }
+}

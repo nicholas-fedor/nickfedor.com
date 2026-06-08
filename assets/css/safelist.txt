@@ -1,0 +1,13 @@
+# Tailwind safelist for custom homepage styles
+
+# Background overlay
+hx:bg-slate-800/15
+hx:dark:hx:bg-slate-900/25
+
+# Positioning
+hx:fixed
+hx:inset-0
+hx:pointer-events-none
+
+# Card hover
+hx:hover:shadow-md
