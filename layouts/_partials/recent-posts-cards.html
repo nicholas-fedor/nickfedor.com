@@ -1,0 +1,63 @@
+{{/* Recent posts rendered using Hextra's card components. */}}
+{{ $posts := where site.RegularPages "Section" "blog" | first 6 }}
+{{ if $posts }}
+<div class="hextra-cards hx:grid hx:gap-4 hx:md:grid-cols-2 hx:lg:grid-cols-3" style="--hextra-cards-grid-cols: 3;">
+    {{ range $posts }}
+    {{/* Resolve banner image: try front matter first, then auto-discover from bundle */}}
+    {{ $banner := "" }}
+    {{ with .Params.banner }}
+        {{ $banner = $.Resources.GetMatch . }}
+    {{ end }}
+    {{ if not $banner }}
+        {{ $banner = .Resources.GetMatch "{banner,featured,cover,thumbnail}*" }}
+    {{ end }}
+    {{ if not $banner }}
+        {{ $banner = (.Resources.ByType "image").GetMatch "*-banner*" }}
+    {{ end }}
+    {{ if not $banner }}
+        {{ $banner = (.Resources.ByType "image").GetMatch "*-light*" }}
+    {{ end }}
+    {{ if not $banner }}
+        {{ with .Resources.ByType "image" }}
+            {{ $banner = index . 0 }}
+        {{ end }}
+    {{ end }}
+    <a
+        href="{{ .RelPermalink }}"
+        class="hextra-card hx:group hx:flex hx:flex-col hx:justify-start hx:overflow-hidden hx:rounded-lg hx:border hx:border-gray-200 hx:text-current hx:no-underline hx:dark:shadow-none hx:shadow-gray-100 hx:transition-all hx:duration-200 hx:hover:shadow-md"
+    >
+        {{ with $banner }}
+        <div class="hextra-card-banner hx:relative hx:overflow-hidden hx:aspect-[16/9]">
+            <img
+                src="{{ .RelPermalink }}"
+                alt="{{ $.Title }}"
+                loading="lazy"
+                class="hx:w-full hx:h-full hx:object-cover hx:transition-transform hx:duration-300 hx:group-hover:scale-105"
+            />
+        </div>
+        {{ end }}
+        <div class="hx:p-4 hx:flex-1 hx:flex hx:flex-col">
+            <div
+                class="hextra-card-title hx:font-semibold hx:text-gray-700 hx:group-hover:text-gray-900 hx:dark:text-neutral-200 hx:dark:group-hover:text-neutral-50"
+            >
+                {{ .Title }}
+            </div>
+
+            <div
+                class="hextra-card-date hx:mt-1 hx:text-xs hx:text-gray-400 hx:dark:text-gray-500"
+            >
+                {{ .Date.Format "Jan 2, 2006" }}
+            </div>
+
+            <div
+                class="hextra-card-subtitle hx:mt-2 hx:text-sm hx:font-normal hx:text-gray-500 hx:dark:text-gray-400 hx:line-clamp-4 hx:flex-1"
+            >
+                {{ .Summary | plainify | truncate 160 "…" }}
+            </div>
+        </div>
+    </a>
+    {{ end }}
+</div>
+{{ else }}
+<p class="text-sm opacity-70">No blog posts yet.</p>
+{{ end }}
