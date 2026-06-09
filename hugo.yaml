@@ -1,12 +1,38 @@
+# yaml-language-server: $schema=https://www.schemastore.org/hugo.json
+
 # nickfedor.com Hugo Configuration
 
-# Hugo and the Hextra theme documentation references are provided, if possible.
 # https://gohugo.io/configuration/introduction/
 # https://imfing.github.io/hextra/docs/guide/configuration/
 
 baseURL: https://nickfedor.com/
 locale: en-us
 title: nickfedor.com
+
+# https://gohugo.io/configuration/imaging/
+imaging:
+  # https://gohugo.io/configuration/imaging/#top-level-settings
+  anchor: Smart
+  resampleFilter: Lanczos
+
+  # https://gohugo.io/configuration/imaging/#jpeg
+  jpeg:
+    quality: 85
+
+  # https://gohugo.io/configuration/imaging/#webp
+  webp:
+    compression: lossy
+    hint: photo
+    method: 6
+    quality: 88
+    useSharpYuv: false
+
+  # https://gohugo.io/configuration/imaging/#avif
+  avif:
+    compression: lossy
+    encoderSpeed: 1
+    hint: photo
+    quality: 88
 
 # https://gohugo.io/configuration/menus/
 # https://imfing.github.io/hextra/docs/guide/configuration/#menu

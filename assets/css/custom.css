@@ -1,36 +1,26 @@
-/* Custom homepage styles */
+/* Custom styles for dark-only homepage and Hextra components. */
 
-/* Signal to the browser and Dark Reader that this is a dark-only site */
+/* Dark-only site: inform browser + extensions (e.g. Dark Reader). */
 :root {
   color-scheme: dark;
 }
 
-/* Base dark background applied immediately on <html> for this dark-only site.
-   Prevents white flash during initial HTML parse, CSS application, or
-   before the head theme script adds the 'dark' class. Since the site
-   hardcodes class="dark" on <html> via baseof.html, these ensure the
-   viewport is dark from the very first paint. */
+/* Immediate dark background on <html>/<body>.
+   Prevents flash before external CSS or head theme script (baseof hardcodes class="dark"). */
 html,
 body {
   background-color: #111;
 }
 
-/* Homepage background image with color overlay.
-   Scoped to .home-background so it only applies to the homepage.
-   Uses transparent background-color to prevent Dark Reader from
-   injecting a dark overlay on top of the image. */
+/* Background image injected via Hugo processing (see layouts/_partials/home-hero-style.html).
+   Uses image-set for modern formats + cache-busted URLs. */
 .home-background {
   background-color: transparent !important;
-  background-image:
-    linear-gradient(rgba(30, 41, 59, 0.2), rgba(30, 41, 59, 0.2)),
-    url("/images/background.png") !important;
-  background-size: cover !important;
-  background-position: center !important;
-  background-repeat: no-repeat !important;
-  background-attachment: scroll !important;
 }
 
-/* Hero section with glass effect */
+/* Hero: glassmorphism container matching the style of .hextra-card post cards.
+   The panel sits over the processed galactic background image (see home-hero-style.html).
+   Uses identical dark frosted glass + border + shadow for visual consistency. */
 .home-hero {
   position: relative;
   display: flex;
@@ -48,37 +38,34 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background-color: rgba(241, 245, 249, 0.08);
+  /* Match .hextra-card glass exactly for consistent "card" appearance */
+  background-color: rgba(17, 17, 17, 0.4) !important;
   backdrop-filter: blur(12px) saturate(180%);
   -webkit-backdrop-filter: blur(12px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
   border-radius: 0.375rem;
   z-index: 0;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.15);
 }
 
-/* Dark scrim overlay to compress background luminance range
-   and ensure text contrast over the bright galactic center */
+/* Very light overall veil. The primary background treatment is the glass above;
+   this just takes a bit more edge off the brightest parts of the galaxy image
+   so white text + shadows remain crisp. Matches the uniform dark panel of cards. */
 .home-hero::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(10, 10, 10, 0.25) 0%,
-    rgba(10, 10, 10, 0.12) 40%,
-    rgba(10, 10, 10, 0.25) 100%
-  );
+  background: rgba(10, 10, 10, 0.12);
   z-index: 0;
   pointer-events: none;
 }
 
 .dark .home-hero::before {
-  background-color: rgba(255, 255, 255, 0.05);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+  background-color: rgba(17, 17, 17, 0.5) !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.25);
 }
 
-/* Text shadow for improved legibility over variable background */
+/* Text shadows improve contrast over variable hero background. */
 .home-hero h1 {
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
@@ -88,12 +75,8 @@ body {
     text-shadow: 0 1px 6px rgba(0, 0, 0, 0.45);
 }
 
-/* Footer: compact */
-.hextra-footer .hextra-custom-footer {
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-}
-
+/* Compact footer spacing to match overall design density. */
+.hextra-footer .hextra-custom-footer,
 .hextra-footer > div:last-child {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
@@ -107,7 +90,8 @@ body {
     margin-top: 0.25rem !important;
 }
 
-/* Card glassmorphism */
+/* Glassmorphism cards (homepage recent posts).
+   Backdrop + subtle border + shadow; hover lift; separate dark variant for contrast. */
 .hextra-card {
   position: relative;
   background-color: rgba(17, 17, 17, 0.4) !important;
@@ -135,7 +119,7 @@ body {
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.35);
 }
 
-/* Card grid: explicit columns per breakpoint */
+/* Explicit responsive grid (overrides Hextra default for 3-col on lg+). */
 .hextra-cards {
   grid-template-columns: 1fr;
 }
@@ -152,7 +136,7 @@ body {
   }
 }
 
-/* Card banner image */
+/* Card internal elements: banner divider, title/date/subtitle theming. */
 .hextra-card .hextra-card-banner {
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   padding: 0.75rem 0.75rem 0;
@@ -163,7 +147,6 @@ body {
   border-radius: 0.25rem;
 }
 
-/* Card title */
 .hextra-card .hextra-card-title {
     font-size: 0.9375rem;
     line-height: 1.4;
@@ -174,7 +157,6 @@ body {
     color: rgb(241, 245, 249);
 }
 
-/* Card date */
 .hextra-card .hextra-card-date {
     letter-spacing: 0.025em;
     color: rgb(100, 116, 139);
@@ -184,7 +166,6 @@ body {
     color: rgb(180, 194, 214);
 }
 
-/* Card subtitle / summary */
 .hextra-card .hextra-card-subtitle {
     font-size: 0.875rem;
     font-weight: 400;
@@ -196,7 +177,7 @@ body {
     color: rgb(203, 213, 225) !important;
 }
 
-/* Responsive */
+/* Mobile hero height reduction. */
 @media (max-width: 640px) {
   .home-hero {
     min-height: 240px;
@@ -204,13 +185,15 @@ body {
   }
 }
 
-/* Fallback for browsers without backdrop-filter support (~4%).
-   Provides a solid dark background so text remains readable. */
+/* Backdrop-filter fallback (~4% browsers).
+   Solid dark surfaces keep text readable when glass effects unavailable.
+   Values aligned with .hextra-card and .home-hero glass for consistency. */
 @supports not (
   (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))
 ) {
   .home-hero::before {
-    background-color: rgba(10, 10, 10, 0.9);
+    background-color: rgba(10, 10, 10, 0.9) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
   }
 
   .hextra-card {
@@ -223,22 +206,27 @@ body {
   }
 }
 
-/* Respect user preference for reduced transparency.
-   Replaces glass effect with near-opaque surfaces. */
+/* Reduced transparency preference.
+   Removes blur/saturation; uses higher-opacity dark fills for accessibility.
+   Hero and card surfaces stay visually matched. */
 @media (prefers-reduced-transparency: reduce) {
-  .home-hero::before {
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    background-color: rgba(10, 10, 10, 0.93);
-  }
-
-  .home-hero::after {
-    background: rgba(10, 10, 10, 0.75);
-  }
-
+  .home-hero::before,
+  .home-hero::after,
   .hextra-card {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
+  }
+
+  .home-hero::before {
+    background-color: rgba(10, 10, 10, 0.93) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  }
+
+  .home-hero::after {
+    background: rgba(10, 10, 10, 0.6);
+  }
+
+  .hextra-card {
     background-color: rgba(10, 10, 10, 0.93) !important;
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
   }

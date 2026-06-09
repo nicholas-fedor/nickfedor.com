@@ -1,4 +1,11 @@
 <!DOCTYPE html>
+{{/*
+  Base layout for all pages.
+  - Hardcodes "dark" class for this dark-only site (prevents flash; see custom.css).
+  - Provides accessible skip link.
+  - Composes shared head, banner, navbar, page-specific main block, optional footer, and scripts.
+  - Footer is rendered unless explicitly disabled via site params.
+*/}}
 <html lang="{{ .Site.Language.Lang }}" class="dark" dir="{{ partial "utils/hugo-compat/language-direction.html" .Site.Language | default `ltr` }}">
   {{- partial "head.html" . -}}
   <body>

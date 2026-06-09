@@ -1,0 +1,30 @@
+{{/*
+  Homepage hero background.
+  Hugo-processes assets/images/background.png → WebP + JPEG (AVIF omitted for
+  this 5120x1440 source; Hugo AVIF encoder can produce 0-byte output at this
+  size/quality; other images still receive full AVIF+WebP treatment).
+  Replaces previous 11 MiB static PNG. Benefits: modern formats, [imaging]
+  quality control from hugo.yaml, cache-busted filenames, smaller LCP.
+*/}}
+{{ if .IsHome }}
+  {{ $bg := resources.Get "images/background.png" }}
+  {{ if $bg }}
+    {{ $webp := $bg.Process "webp q88" }}
+    {{ $jpg  := $bg.Process "jpg q88" }}
+<style>
+.home-background {
+  background-color: transparent !important;
+  background-image:
+    linear-gradient(rgba(30, 41, 59, 0.2), rgba(30, 41, 59, 0.2)),
+    image-set(
+      url("{{ $webp.RelPermalink }}") type("image/webp"),
+      url("{{ $jpg.RelPermalink }}") type("image/jpeg")
+    ) !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: scroll !important;
+}
+</style>
+  {{ end }}
+{{ end }}
