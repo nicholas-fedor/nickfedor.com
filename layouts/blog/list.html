@@ -1,4 +1,11 @@
 {{ define "main" }}
+{{/*
+  Blog listing layout (paginated index of posts).
+  - Sidebar disabled with placeholder for layout consistency.
+  - Right TOC column omitted (no headings to summarize on an index page).
+  - Posts are sorted and paginated via site params (blog.list.*).
+  - Each entry shows title, optional tags, summary, "read more", and date.
+*/}}
   {{- $readMore := (T "readMore") | default "Read more →" -}}
   <div class="hx:mx-auto hx:flex hextra-max-page-width">
     {{ partial "sidebar.html" (dict "context" . "disableSidebar" true "displayPlaceholder" true) }}
@@ -34,6 +41,5 @@
         {{- end -}}
       </main>
     </article>
-    {{/* Removed the right spacer div that was causing the empty column */}}
   </div>
 {{- end -}}

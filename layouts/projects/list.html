@@ -1,4 +1,10 @@
 {{ define "main" }}
+{{/*
+  Projects listing / content page.
+  - Sidebar disabled (placeholder maintains grid width).
+  - TOC enabled on the right (content typically has headings).
+  - Standard content + last-updated + comments.
+*/}}
   <div class='hx:mx-auto hx:flex hextra-max-page-width'>
     {{ partial "sidebar.html" (dict "context" . "disableSidebar" true "displayPlaceholder" true) }}
     {{ partial "toc.html" . }}
