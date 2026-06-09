@@ -1,0 +1,9 @@
+{
+  "yaml.schemaStore.enable": true,
+  "yaml.schemas": {
+    "https://www.schemastore.org/hugo.json": [
+      "hugo.yaml",
+      "**/hugo.yaml"
+    ]
+  }
+}

@@ -3,10 +3,10 @@ title: "Rebuilding my website"
 date: 2025-04-17
 draft: false
 slug: "rebuilding-my-website"
+banner: "ghost-banner.png"
 ---
-![Banner](ghost-logo-light.png)
 
-As of late October 2024, I decided to take a leap of faith and invest in building a website using [Ghost](https://ghost.org) hosted on [Digital Ocean](https://m.do.co/c/c015e918f625).
+As of late October 2024, I decided to take a leap of faith and invest in building a website using [Ghost](https://ghost.org) hosted on [Digital Ocean](https://www.digitalocean.com/).
 
 Prior to this, I was utilizing [GitHub Pages](https://pages.github.com/) as a "basic" option for hosting static content. For the cost of a domain name, you are able to host a website with a large amount of flexibility. That flexibility comes at the cost of either relying upon [Jekyll templates](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/about-github-pages-and-jekyll#themes) or building from scratch.
 

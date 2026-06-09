@@ -1,4 +1,10 @@
 {{ define "main" }}
+{{/*
+  Homepage layout.
+  - Uses a full-bleed custom hero (background injected via head-end + home-hero-style).
+  - Sidebar is disabled but a placeholder is rendered to maintain consistent page width.
+  - Recent posts are pulled via the dedicated cards partial (up to 6).
+*/}}
 <div class="home-background">
 <div class="hx:mx-auto hx:flex hextra-max-page-width">
     {{ partial "sidebar.html" (dict "context" . "disableSidebar" true

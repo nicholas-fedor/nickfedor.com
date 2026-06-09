@@ -1,9 +1,14 @@
-{{/* Recent posts rendered using Hextra's card components. */}}
+{{/*
+  Recent posts cards (homepage).
+  Uses Hextra card primitives.
+  Limits to 6 most recent posts from the blog section.
+  Banner resolution order: frontmatter "banner" → common names → *-banner* → *-light* → first image in bundle.
+  Banner images are used raw here (Markdown images get processed by the render-image hook).
+*/}}
 {{ $posts := where site.RegularPages "Section" "blog" | first 6 }}
 {{ if $posts }}
 <div class="hextra-cards hx:grid hx:gap-4 hx:md:grid-cols-2 hx:lg:grid-cols-3" style="--hextra-cards-grid-cols: 3;">
     {{ range $posts }}
-    {{/* Resolve banner image: try front matter first, then auto-discover from bundle */}}
     {{ $banner := "" }}
     {{ with .Params.banner }}
         {{ $banner = $.Resources.GetMatch . }}
@@ -32,6 +37,7 @@
                 src="{{ .RelPermalink }}"
                 alt="{{ $.Title }}"
                 loading="lazy"
+                decoding="async"
                 class="hx:w-full hx:h-full hx:object-cover hx:transition-transform hx:duration-300 hx:group-hover:scale-105"
             />
         </div>

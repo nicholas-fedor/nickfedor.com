@@ -1,6 +1,8 @@
 <style>
-  /* Critical inline style to set dark background on first paint.
-     This mitigates any flash before the external stylesheet (even with preload)
-     or the head theme script fully takes effect. */
+  /* Critical FOUC prevention for dark-only site.
+     Sets dark bg + color-scheme before external CSS or theme script runs. */
   html, body { background-color: #111; color-scheme: dark; }
 </style>
+
+{{- /* Inject homepage hero background (processed WebP/JPEG via Hugo resources). */ -}}
+{{- partial "home-hero-style.html" . -}}
