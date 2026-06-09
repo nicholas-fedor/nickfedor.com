@@ -5,6 +5,16 @@
   color-scheme: dark;
 }
 
+/* Base dark background applied immediately on <html> for this dark-only site.
+   Prevents white flash during initial HTML parse, CSS application, or
+   before the head theme script adds the 'dark' class. Since the site
+   hardcodes class="dark" on <html> via baseof.html, these ensure the
+   viewport is dark from the very first paint. */
+html,
+body {
+  background-color: #111;
+}
+
 /* Homepage background image with color overlay.
    Scoped to .home-background so it only applies to the homepage.
    Uses transparent background-color to prevent Dark Reader from
