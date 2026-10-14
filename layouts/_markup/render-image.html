@@ -1,7 +1,9 @@
 {{- /*
   Goldmark image render hook.
   Resolves from page bundle first, then assets/images/.
-  Produces AVIF + WebP <picture> with original as JPEG/PNG fallback.
+  Produces a WebP <picture> with the original as JPEG/PNG fallback.
+  AVIF is omitted because Hugo's AVIF encoder hangs on some sources until the
+  build times out.
   Keeps alt/title/attributes; applies lazy/async.
   Place at layouts/_markup/render-image.html to affect all Markdown images.
 */ -}}
@@ -10,10 +12,8 @@
   {{- $img = resources.Get (printf "images/%s" (.Destination | path.Base)) -}}
 {{- end -}}
 {{- if $img -}}
-  {{- $avif := $img.Process "avif q85" -}}
   {{- $webp := $img.Process "webp q85" -}}
   <picture>
-    <source srcset="{{ $avif.RelPermalink }}" type="image/avif">
     <source srcset="{{ $webp.RelPermalink }}" type="image/webp">
     <img src="{{ $img.RelPermalink }}" alt="{{ .Text }}" {{ with .Title }}title="{{ . }}"{{ end }} loading="lazy" decoding="async">
   </picture>
