@@ -4,6 +4,7 @@
   Based on Hextra's blog/single.html, with a banner image and no TOC column.
   The blog cascade sets toc: false and sidebar.hide, so the TOC column would be empty and push the post off-center.
   Banner lookup order: front matter "banner", then common names, then any *-banner* or *-light* image in the page bundle.
+  The banner is styled by the .post-banner rules in assets/css/custom.css.
 */}}
   <div class="hx:mx-auto hx:flex hextra-max-page-width">
     {{ partial "sidebar.html" (dict "context" . "disableSidebar" true "displayPlaceholder" true) }}
@@ -32,13 +33,12 @@
           {{- $banner = (.Resources.ByType "image").GetMatch "*-light*" -}}
         {{- end -}}
         {{- if $banner -}}
-        <div class="hx:mb-6 hx:-mx-6 hx:md:mx-0 hx:overflow-hidden hx:rounded-lg hx:border hx:border-gray-200 hx:dark:border-gray-800">
+        <div class="post-banner">
           <img
             src="{{ $banner.RelPermalink }}"
             alt="{{ .Title }}"
             loading="lazy"
             decoding="async"
-            class="hx:w-full hx:h-auto hx:object-cover"
           />
         </div>
         {{- end }}
