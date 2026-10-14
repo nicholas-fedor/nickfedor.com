@@ -27,13 +27,6 @@ imaging:
     quality: 88
     useSharpYuv: false
 
-  # https://gohugo.io/configuration/imaging/#avif
-  avif:
-    compression: lossy
-    encoderSpeed: 1
-    hint: photo
-    quality: 88
-
 # https://gohugo.io/configuration/menus/
 # https://imfing.github.io/hextra/docs/guide/configuration/#menu
 menus:
