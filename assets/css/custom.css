@@ -14,6 +14,27 @@ body {
   background-color: #111;
 }
 
+/* Sticky footer.
+   The body is a flex column at least one viewport tall and the page wrapper grows to fill it, so the footer sits at the bottom of short pages instead of below the fold.
+   Hextra's layouts give the article a minimum height of the viewport minus the navbar, which would still push the footer down, so that minimum is reset.
+   dvh keeps the footer in view on mobile browsers whose toolbars cover part of 100vh. */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+body > .hextra-max-page-width,
+body > .home-background {
+  flex: 1 0 auto;
+  width: 100%;
+}
+
+.hextra-max-page-width > article {
+  min-height: 0;
+}
+
 /* Homepage hero.
    A frosted glass panel over the galaxy background (see layouts/_partials/home-hero-style.html).
    Uses the same glass surface as the recent post cards. */
@@ -81,6 +102,7 @@ body {
 /* Homepage section heading and the link to the full blog listing. */
 .home-section-title {
   margin-bottom: 0.75rem;
+  text-align: center;
   font-size: 1.25rem;
   line-height: 1.75rem;
   font-weight: 600;
@@ -89,12 +111,14 @@ body {
 
 .home-view-all {
   margin-top: 1.5rem;
+  text-align: center;
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
 
+/* Light text instead of the link blue, which is hard to read over the background image. */
 .home-view-all a {
-  color: var(--hx-color-primary-600);
+  color: var(--hx-color-gray-100);
   text-decoration: none;
 }
 
@@ -102,39 +126,60 @@ body {
   text-decoration: underline;
 }
 
-/* Compact footer spacing to match overall design density. */
-.hextra-footer .hextra-custom-footer,
-.hextra-footer > div:last-child {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+/* Site footer (layouts/_partials/custom/footer.html).
+   Copyright and social icons share one row, and stack centered on small screens. */
+.site-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 0;
+  font-size: 0.75rem;
+  line-height: 1rem;
 }
 
-.hextra-footer > div:last-child > div {
-  gap: 0.25rem;
+@media (min-width: 640px) {
+  .site-footer {
+    flex-direction: row;
+    justify-content: space-between;
+  }
 }
 
-.hextra-footer .hx\:mt-6 {
-  margin-top: 0.25rem;
-}
-
-/* Recent post cards on the homepage (layouts/_partials/recent-posts-cards.html).
-   Frosted glass surface with a subtle border, shadow, and hover lift. */
-.post-cards {
-  display: grid;
-  grid-template-columns: 1fr;
+.site-footer-social {
+  display: flex;
+  align-items: center;
   gap: 1rem;
 }
 
-@media (min-width: 768px) {
-  .post-cards {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.site-footer-social a {
+  display: flex;
+  color: inherit;
+  transition: color 0.15s ease;
 }
 
-@media (min-width: 1024px) {
-  .post-cards {
-    grid-template-columns: repeat(3, 1fr);
-  }
+.site-footer-social a:hover {
+  color: var(--hx-color-gray-100);
+}
+
+.site-footer-social a:focus-visible {
+  outline: 2px solid var(--hx-color-primary-600);
+  outline-offset: 2px;
+  border-radius: 0.25rem;
+}
+
+.site-footer-social svg {
+  width: auto;
+  height: 1.25rem;
+}
+
+/* Recent post cards on the homepage (layouts/_partials/recent-posts-cards.html).
+   Frosted glass surface with a subtle border, shadow, and hover lift.
+   Up to three columns fit the content width. With fewer posts than columns, the empty tracks collapse and the cards stay centered. */
+.post-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(17rem, 100%), 21rem));
+  justify-content: center;
+  gap: 1rem;
 }
 
 .post-cards-empty {
@@ -233,10 +278,16 @@ body {
   line-clamp: 4;
 }
 
+/* Reading column for text pages (section pages, the blog listing, and posts).
+   Keeps lines near 72 characters instead of Hextra's 72rem content width, plus the main element's horizontal padding. */
+.reading-column {
+  max-width: calc(72ch + 6rem);
+}
+
 /* Blog post banner (layouts/blog/single.html).
    Bleeds to the screen edges on small screens and becomes a bordered, rounded frame from the md breakpoint. */
 .post-banner {
-  margin: 0 -1.5rem 1.5rem;
+  margin: 1.5rem -1.5rem;
   overflow: hidden;
   border-block: 1px solid var(--hx-color-gray-800);
 }

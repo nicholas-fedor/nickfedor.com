@@ -48,23 +48,26 @@ menus:
       weight: 4
       params:
         type: search
+
+  # Social links, rendered as icons in the footer by layouts/_partials/custom/footer.html.
+  social:
     - name: GitHub
-      weight: 5
+      weight: 1
       url: "https://github.com/nicholas-fedor"
       params:
         icon: github
     - name: Twitter
-      weight: 6
+      weight: 2
       url: "https://twitter.com/NickFedor_"
       params:
         icon: x-twitter
     - name: Reddit
-      weight: 7
+      weight: 3
       url: "https://www.reddit.com/user/nick_fedor"
       params:
         icon: reddit
     - name: LinkedIn
-      weight: 8
+      weight: 4
       url: "https://www.linkedin.com/in/nick-fedor"
       params:
         icon: linkedin
@@ -89,7 +92,8 @@ params:
 
   # https://imfing.github.io/hextra/docs/guide/configuration/#footer
   footer:
-    displayCopyright: true
+    # The copyright line is rendered by layouts/_partials/custom/footer.html so it can share a row with the social links.
+    displayCopyright: false
     displayPoweredBy: false
 
   # https://imfing.github.io/hextra/docs/guide/syntax-highlighting/#copy-button
