@@ -23,7 +23,8 @@ imaging:
   webp:
     compression: lossy
     hint: photo
-    method: 6
+    # Method 4 encodes the large background about four times faster than 6, with files about 1% larger.
+    method: 4
     quality: 88
     useSharpYuv: false
 

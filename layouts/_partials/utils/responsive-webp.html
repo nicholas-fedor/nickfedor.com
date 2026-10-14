@@ -1,0 +1,29 @@
+{{/*
+  Returns WebP variants of an image resource for use in an <img> srcset.
+  Takes a dict with "image" (an image resource) and "widths" (ascending target widths in pixels).
+  Targets wider than the original are replaced by the original width, so images are never upscaled.
+  Returns a dict with "src" (the widest variant), "srcset", "width", and "height".
+*/}}
+{{- $img := .image -}}
+{{- $maxTarget := index (last 1 .widths) 0 -}}
+{{- $max := cond (lt $img.Width $maxTarget) $img.Width $maxTarget -}}
+{{- $widths := slice -}}
+{{- range .widths -}}
+  {{- if lt . $max -}}
+    {{- $widths = $widths | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- $widths = $widths | append $max -}}
+{{- $srcset := slice -}}
+{{- $widest := false -}}
+{{- range $widths -}}
+  {{- $variant := false -}}
+  {{- if eq . $img.Width -}}
+    {{- $variant = $img.Process "webp q85" -}}
+  {{- else -}}
+    {{- $variant = $img.Process (printf "resize %dx webp q85" .) -}}
+  {{- end -}}
+  {{- $srcset = $srcset | append (printf "%s %dw" $variant.RelPermalink .) -}}
+  {{- $widest = $variant -}}
+{{- end -}}
+{{- return (dict "src" $widest.RelPermalink "srcset" (delimit $srcset ", ") "width" $widest.Width "height" $widest.Height) -}}

@@ -3,15 +3,16 @@
   Styled by the .post-card rules in assets/css/custom.css.
   Limits to 6 most recent posts from the blog section.
   Banner resolution order: frontmatter "banner" → common names → *-banner* → *-light* → first image in bundle.
-  Banner images are used raw here (Markdown images get processed by the render-image hook).
+  Banner images are served as WebP variants from the utils/responsive-webp partial.
 */}}
 {{ $posts := where site.RegularPages "Section" "blog" | first 6 }}
 {{ if $posts }}
 <div class="post-cards">
     {{ range $posts }}
+    {{ $post := . }}
     {{ $banner := "" }}
     {{ with .Params.banner }}
-        {{ $banner = $.Resources.GetMatch . }}
+        {{ $banner = $post.Resources.GetMatch . }}
     {{ end }}
     {{ if not $banner }}
         {{ $banner = .Resources.GetMatch "{banner,featured,cover,thumbnail}*" }}
@@ -29,9 +30,20 @@
     {{ end }}
     <a href="{{ .RelPermalink }}" class="post-card">
         {{ with $banner }}
+        {{ $img := partial "utils/responsive-webp.html" (dict "image" . "widths" (slice 480 960)) }}
+        {{/* The image is decorative: the card's link text already contains the post title. */}}
         <div class="post-card-banner">
             <div class="post-card-image">
-                <img src="{{ .RelPermalink }}" alt="{{ $.Title }}" loading="lazy" decoding="async" />
+                <img
+                    src="{{ $img.src }}"
+                    srcset="{{ $img.srcset }}"
+                    sizes="(min-width: 1024px) 320px, (min-width: 768px) calc(50vw - 80px), calc(100vw - 74px)"
+                    width="{{ $img.width }}"
+                    height="{{ $img.height }}"
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                />
             </div>
         </div>
         {{ end }}

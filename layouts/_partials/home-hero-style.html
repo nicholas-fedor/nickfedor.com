@@ -1,29 +1,40 @@
 {{/*
-  Homepage hero background.
-  Hugo-processes assets/images/background.png → WebP + JPEG (AVIF omitted for
-  this 5120x1440 source; Hugo AVIF encoder can produce 0-byte output at this
-  size/quality; other images still receive full AVIF+WebP treatment).
-  Replaces previous 11 MiB static PNG. Benefits: modern formats, [imaging]
-  quality control from hugo.yaml, cache-busted filenames, smaller LCP.
+  Homepage background.
+  Processes assets/images/background.png (a 5120x1440 panorama) into WebP for the .home-background element.
+  The background uses cover, so its height sets the scale and narrower viewports only show the center of the panorama.
+  Narrower viewports therefore get center crops at full height, which render the same pixels as the full image while downloading less.
+  Each crop is at least as wide as the visible area for its media query, with headroom for the navbar reducing the element's height.
 */}}
 {{ if .IsHome }}
   {{ $bg := resources.Get "images/background.png" }}
   {{ if $bg }}
-    {{ $webp := $bg.Process "webp q88" }}
-    {{ $jpg  := $bg.Process "jpg q88" }}
+    {{ $full := $bg.Process "webp q88" }}
+    {{ $wide := $bg.Process (printf "crop 2560x%d Center webp q88" $bg.Height) }}
+    {{ $narrow := $bg.Process (printf "crop 1800x%d Center webp q88" $bg.Height) }}
 <style>
 .home-background {
-  background-color: transparent !important;
   background-image:
     linear-gradient(rgba(30, 41, 59, 0.2), rgba(30, 41, 59, 0.2)),
-    image-set(
-      url("{{ $webp.RelPermalink }}") type("image/webp"),
-      url("{{ $jpg.RelPermalink }}") type("image/jpeg")
-    ) !important;
-  background-size: cover !important;
-  background-position: center !important;
-  background-repeat: no-repeat !important;
-  background-attachment: scroll !important;
+    url("{{ $full.RelPermalink }}");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@media (max-aspect-ratio: 16/10) {
+  .home-background {
+    background-image:
+      linear-gradient(rgba(30, 41, 59, 0.2), rgba(30, 41, 59, 0.2)),
+      url("{{ $wide.RelPermalink }}");
+  }
+}
+
+@media (max-aspect-ratio: 1/1) {
+  .home-background {
+    background-image:
+      linear-gradient(rgba(30, 41, 59, 0.2), rgba(30, 41, 59, 0.2)),
+      url("{{ $narrow.RelPermalink }}");
+  }
 }
 </style>
   {{ end }}

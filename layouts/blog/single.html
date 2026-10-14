@@ -4,7 +4,7 @@
   Based on Hextra's blog/single.html, with a banner image and no TOC column.
   The blog cascade sets toc: false and sidebar.hide, so the TOC column would be empty and push the post off-center.
   Banner lookup order: front matter "banner", then common names, then any *-banner* or *-light* image in the page bundle.
-  The banner is styled by the .post-banner rules in assets/css/custom.css.
+  The banner is served as WebP variants from the utils/responsive-webp partial and styled by the .post-banner rules in assets/css/custom.css.
 */}}
   <div class="hx:mx-auto hx:flex hextra-max-page-width">
     {{ partial "sidebar.html" (dict "context" . "disableSidebar" true "displayPlaceholder" true) }}
@@ -33,11 +33,17 @@
           {{- $banner = (.Resources.ByType "image").GetMatch "*-light*" -}}
         {{- end -}}
         {{- if $banner -}}
+        {{- $img := partial "utils/responsive-webp.html" (dict "image" $banner "widths" (slice 640 960 1280 1600)) -}}
+        {{- /* The banner is usually the largest element above the fold, so it loads eagerly with high priority. */ -}}
         <div class="post-banner">
           <img
-            src="{{ $banner.RelPermalink }}"
+            src="{{ $img.src }}"
+            srcset="{{ $img.srcset }}"
+            sizes="(min-width: 1152px) 1056px, (min-width: 768px) calc(100vw - 98px), 100vw"
+            width="{{ $img.width }}"
+            height="{{ $img.height }}"
             alt="{{ .Title }}"
-            loading="lazy"
+            fetchpriority="high"
             decoding="async"
           />
         </div>

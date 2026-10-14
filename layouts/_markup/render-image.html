@@ -4,6 +4,7 @@
   Produces a WebP <picture> with the original as JPEG/PNG fallback.
   AVIF is omitted because Hugo's AVIF encoder hangs on some sources until the build times out.
   Keeps alt/title/attributes; applies lazy/async.
+  Sets width and height so the browser reserves space before the image loads.
   Place at layouts/_markup/render-image.html to affect all Markdown images.
 */ -}}
 {{- $img := .Page.Resources.GetMatch (printf "%s*" (.Destination | path.Base)) -}}
@@ -14,7 +15,7 @@
   {{- $webp := $img.Process "webp q85" -}}
   <picture>
     <source srcset="{{ $webp.RelPermalink }}" type="image/webp">
-    <img src="{{ $img.RelPermalink }}" alt="{{ .Text }}" {{ with .Title }}title="{{ . }}"{{ end }} loading="lazy" decoding="async">
+    <img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}" alt="{{ .Text }}" {{ with .Title }}title="{{ . }}"{{ end }} loading="lazy" decoding="async">
   </picture>
 {{- else -}}
   <img src="{{ .Destination | safeURL }}" alt="{{ .Text }}" {{ with .Title }}title="{{ . }}"{{ end }} loading="lazy" decoding="async">
