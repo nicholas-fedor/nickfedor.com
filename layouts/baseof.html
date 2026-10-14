@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 {{/*
   Base layout for all pages.
-  - Hardcodes "dark" class for this dark-only site (prevents flash; see custom.css).
-  - Provides accessible skip link.
-  - Composes shared head, banner, navbar, page-specific main block, optional footer, and scripts.
-  - Footer is rendered unless explicitly disabled via site params.
+  Matches Hextra's baseof.html, except that the "dark" class is set on <html> so this dark-only site renders dark before scripts run or with JavaScript disabled.
+  Hextra's head script still sets the theme class on load.
 */}}
 <html lang="{{ .Site.Language.Lang }}" class="dark" dir="{{ partial "utils/hugo-compat/language-direction.html" .Site.Language | default `ltr` }}">
   {{- partial "head.html" . -}}
@@ -18,6 +16,7 @@
     {{- if or (eq .Site.Params.footer.enable nil) (.Site.Params.footer.enable) }}
       {{ partial "footer.html" . }}
     {{ end }}
+    {{ partial "components/search-dialog.html" . }}
     {{ partial "scripts.html" . }}
   </body>
 </html>
