@@ -99,6 +99,57 @@ body > .home-background {
   text-shadow: 0 1px 6px rgba(0, 0, 0, 0.45);
 }
 
+.home-hero-logo {
+  display: block;
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 0.75rem;
+}
+
+/* Hero links to the main sections: a solid primary button and a glass outline button. */
+.home-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.home-hero-button {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+  color: white;
+  text-decoration: none;
+  background-color: rgba(255, 255, 255, 0.06);
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.home-hero-button:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.home-hero-button-primary {
+  color: #111;
+  background-color: var(--hx-color-slate-100);
+  border-color: var(--hx-color-slate-100);
+}
+
+.home-hero-button-primary:hover {
+  background-color: white;
+  border-color: white;
+}
+
+.home-hero-button:focus-visible {
+  outline: 2px solid var(--hx-color-primary-600);
+  outline-offset: 2px;
+}
+
 /* Homepage section heading and the link to the full blog listing. */
 .home-section-title {
   margin-bottom: 0.75rem;
@@ -307,11 +358,16 @@ body > .home-background {
   }
 }
 
-/* Mobile hero height reduction. */
+/* Mobile hero: less height and padding, so the two hero buttons fit side by side. */
 @media (max-width: 640px) {
   .home-hero {
     min-height: 240px;
     margin-bottom: 1.25rem;
+    padding: 1.5rem 1rem;
+  }
+
+  .home-hero-content {
+    padding: 0.5rem;
   }
 }
 

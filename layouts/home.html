@@ -2,6 +2,7 @@
 {{/*
   Homepage layout.
   - Uses a full-bleed custom hero (background injected via head-end + home-hero-style).
+  - The hero shows the logo, title, tagline, and buttons linking to the blog and projects sections.
   - Homepage components are styled by named classes in assets/css/custom.css.
   - Sidebar is disabled. The home front matter sets sidebar.hide, so no placeholder column is rendered and the content stays centered.
   - Recent posts are pulled via the dedicated cards partial (up to 6).
@@ -20,11 +21,17 @@
             {{/* Hero section */}}
             <div class="home-hero">
                 <div class="home-hero-content">
+                    {{/* Decorative: the site title follows directly, so the logo has empty alt text. */}}
+                    <img class="home-hero-logo" src="{{ site.Params.navbar.logo.path | default "images/logo.svg" | relURL }}" width="56" height="56" alt="" />
                     <h1 class="home-hero-title">Nick Fedor</h1>
                     <p class="home-hero-tagline">
                         My personal site for<br />
                         Homelab • Self-Hosting • Tech • Building Things
                     </p>
+                    <div class="home-hero-actions">
+                        {{ with site.GetPage "/blog" }}<a class="home-hero-button home-hero-button-primary" href="{{ .RelPermalink }}">Read the blog</a>{{ end }}
+                        {{ with site.GetPage "/projects" }}<a class="home-hero-button" href="{{ .RelPermalink }}">See projects</a>{{ end }}
+                    </div>
                 </div>
             </div>
 
