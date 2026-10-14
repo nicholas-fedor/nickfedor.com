@@ -1,0 +1,20 @@
+{{/*
+  Site footer content, rendered through Hextra's custom/footer.html hook.
+  Shows the copyright line and the icons from the "social" menu in hugo.yaml.
+  Hextra's own copyright section is turned off (params.footer.displayCopyright: false) so both share one row.
+  Styled by the .site-footer rules in assets/css/custom.css.
+*/}}
+<div class="site-footer">
+  <p class="site-footer-copyright">{{ (T "copyright") | markdownify }}</p>
+  {{- with site.Menus.social }}
+  <ul class="site-footer-social">
+    {{- range . }}
+    <li>
+      <a href="{{ .URL }}" target="_blank" rel="noopener noreferrer" aria-label="{{ .Name }}" title="{{ .Name }}">
+        {{- partial "utils/icon.html" (dict "name" .Params.icon "attributes" `height="20" aria-hidden="true" focusable="false"`) -}}
+      </a>
+    </li>
+    {{- end }}
+  </ul>
+  {{- end }}
+</div>
