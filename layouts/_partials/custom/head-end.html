@@ -4,5 +4,8 @@
   html, body { background-color: #111; color-scheme: dark; }
 </style>
 
+{{- /* Matches the browser UI to the dark page background. */}}
+<meta name="theme-color" content="#111111" />
+
 {{- /* Inject homepage hero background (processed WebP/JPEG via Hugo resources). */ -}}
 {{- partial "home-hero-style.html" . -}}
