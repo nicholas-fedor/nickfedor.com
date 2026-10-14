@@ -9,6 +9,13 @@ baseURL: https://nickfedor.com/
 locale: en-us
 title: nickfedor.com
 
+# https://gohugo.io/configuration/all/#disablekinds
+# No content uses tags or categories, so their listing pages are not generated.
+# Remove this setting when posts start using taxonomies.
+disableKinds:
+  - taxonomy
+  - term
+
 # https://gohugo.io/configuration/imaging/
 imaging:
   # https://gohugo.io/configuration/imaging/#top-level-settings
