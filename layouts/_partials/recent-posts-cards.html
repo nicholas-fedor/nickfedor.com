@@ -1,13 +1,13 @@
 {{/*
   Recent posts cards (homepage).
-  Uses Hextra card primitives.
+  Styled by the .post-card rules in assets/css/custom.css.
   Limits to 6 most recent posts from the blog section.
   Banner resolution order: frontmatter "banner" → common names → *-banner* → *-light* → first image in bundle.
   Banner images are used raw here (Markdown images get processed by the render-image hook).
 */}}
 {{ $posts := where site.RegularPages "Section" "blog" | first 6 }}
 {{ if $posts }}
-<div class="hextra-cards hx:grid hx:gap-4 hx:md:grid-cols-2 hx:lg:grid-cols-3" style="--hextra-cards-grid-cols: 3;">
+<div class="post-cards">
     {{ range $posts }}
     {{ $banner := "" }}
     {{ with .Params.banner }}
@@ -27,43 +27,22 @@
             {{ $banner = index . 0 }}
         {{ end }}
     {{ end }}
-    <a
-        href="{{ .RelPermalink }}"
-        class="hextra-card hx:group hx:flex hx:flex-col hx:justify-start hx:overflow-hidden hx:rounded-lg hx:border hx:border-gray-200 hx:text-current hx:no-underline hx:dark:shadow-none hx:shadow-gray-100 hx:transition-all hx:duration-200 hx:hover:shadow-md"
-    >
+    <a href="{{ .RelPermalink }}" class="post-card">
         {{ with $banner }}
-        <div class="hextra-card-banner hx:relative hx:overflow-hidden hx:aspect-[16/9]">
-            <img
-                src="{{ .RelPermalink }}"
-                alt="{{ $.Title }}"
-                loading="lazy"
-                decoding="async"
-                class="hx:w-full hx:h-full hx:object-cover hx:transition-transform hx:duration-300 hx:group-hover:scale-105"
-            />
+        <div class="post-card-banner">
+            <div class="post-card-image">
+                <img src="{{ .RelPermalink }}" alt="{{ $.Title }}" loading="lazy" decoding="async" />
+            </div>
         </div>
         {{ end }}
-        <div class="hx:p-4 hx:flex-1 hx:flex hx:flex-col">
-            <div
-                class="hextra-card-title hx:font-semibold hx:text-gray-700 hx:group-hover:text-gray-900 hx:dark:text-neutral-200 hx:dark:group-hover:text-neutral-50"
-            >
-                {{ .Title }}
-            </div>
-
-            <div
-                class="hextra-card-date hx:mt-1 hx:text-xs hx:text-gray-400 hx:dark:text-gray-500"
-            >
-                {{ .Date.Format "Jan 2, 2006" }}
-            </div>
-
-            <div
-                class="hextra-card-subtitle hx:mt-2 hx:text-sm hx:font-normal hx:text-gray-500 hx:dark:text-gray-400 hx:line-clamp-4 hx:flex-1"
-            >
-                {{ .Summary | plainify | truncate 160 "…" }}
-            </div>
+        <div class="post-card-body">
+            <div class="post-card-title">{{ .Title }}</div>
+            <div class="post-card-date">{{ .Date.Format "Jan 2, 2006" }}</div>
+            <div class="post-card-summary">{{ .Summary | plainify | truncate 160 "…" }}</div>
         </div>
     </a>
     {{ end }}
 </div>
 {{ else }}
-<p class="text-sm opacity-70">No blog posts yet.</p>
+<p class="post-cards-empty">No blog posts yet.</p>
 {{ end }}

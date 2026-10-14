@@ -1,4 +1,6 @@
-/* Custom styles for dark-only homepage and Hextra components. */
+/* Custom styles for this dark-only site, appended after Hextra's compiled CSS. */
+/* Hextra's compiled CSS only contains the hx: utilities that Hextra itself uses, so the site's own components are styled here with named classes. */
+/* Hextra's utilities live in @layer utilities. These rules are unlayered, so they override those utilities without !important. */
 
 /* Dark-only site: inform browser + extensions (e.g. Dark Reader). */
 :root {
@@ -12,15 +14,9 @@ body {
   background-color: #111;
 }
 
-/* Background image injected via Hugo processing (see layouts/_partials/home-hero-style.html).
-   Uses image-set for modern formats + cache-busted URLs. */
-.home-background {
-  background-color: transparent !important;
-}
-
-/* Hero: glassmorphism container matching the style of .hextra-card post cards.
-   The panel sits over the processed galactic background image (see home-hero-style.html).
-   Uses identical dark frosted glass + border + shadow for visual consistency. */
+/* Homepage hero.
+   A frosted glass panel over the galaxy background (see layouts/_partials/home-hero-style.html).
+   Uses the same glass surface as the recent post cards. */
 .home-hero {
   position: relative;
   display: flex;
@@ -38,143 +34,226 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  /* Match .hextra-card glass exactly for consistent "card" appearance */
-  background-color: rgba(17, 17, 17, 0.4) !important;
+  z-index: 0;
+  background-color: rgba(17, 17, 17, 0.5);
   backdrop-filter: blur(12px) saturate(180%);
   -webkit-backdrop-filter: blur(12px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 0.375rem;
-  z-index: 0;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.25);
 }
 
-/* Very light overall veil. The primary background treatment is the glass above;
-   this just takes a bit more edge off the brightest parts of the galaxy image
-   so white text + shadows remain crisp. Matches the uniform dark panel of cards. */
+/* Light veil that takes the edge off the brightest parts of the galaxy image so the white text stays crisp. */
 .home-hero::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(10, 10, 10, 0.12);
   z-index: 0;
+  background: rgba(10, 10, 10, 0.12);
   pointer-events: none;
 }
 
-.dark .home-hero::before {
-  background-color: rgba(17, 17, 17, 0.5) !important;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.25);
+/* Hero text sits above the glass and veil layers. */
+.home-hero-content {
+  position: relative;
+  z-index: 1;
+  padding: 1rem 1.5rem;
+  text-align: center;
 }
 
-/* Text shadows improve contrast over variable hero background. */
-.home-hero h1 {
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+.home-hero-title {
+  margin-bottom: 0.5rem;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: white;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
-.home-hero p {
-    color: rgb(255, 255, 255);
-    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.45);
+.home-hero-tagline {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  color: white;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.45);
+}
+
+/* Homepage section heading and the link to the full blog listing. */
+.home-section-title {
+  margin-bottom: 0.75rem;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  color: var(--hx-color-slate-100);
+}
+
+.home-view-all {
+  margin-top: 1.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.home-view-all a {
+  color: var(--hx-color-primary-600);
+  text-decoration: none;
+}
+
+.home-view-all a:hover {
+  text-decoration: underline;
 }
 
 /* Compact footer spacing to match overall design density. */
 .hextra-footer .hextra-custom-footer,
 .hextra-footer > div:last-child {
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .hextra-footer > div:last-child > div {
-    gap: 0.25rem;
+  gap: 0.25rem;
 }
 
 .hextra-footer .hx\:mt-6 {
-    margin-top: 0.25rem !important;
+  margin-top: 0.25rem;
 }
 
-/* Glassmorphism cards (homepage recent posts).
-   Backdrop + subtle border + shadow; hover lift; separate dark variant for contrast. */
-.hextra-card {
-  position: relative;
-  background-color: rgba(17, 17, 17, 0.4) !important;
-  backdrop-filter: blur(12px) saturate(180%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.12) !important;
-  border-radius: 0.375rem !important;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.15);
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.dark .hextra-card {
-  background-color: rgba(17, 17, 17, 0.5) !important;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.25);
-}
-
-.hextra-card:hover {
-  background-color: rgba(17, 17, 17, 0.5) !important;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.18);
-}
-
-.dark .hextra-card:hover {
-  background-color: rgba(17, 17, 17, 0.6) !important;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.35);
-}
-
-/* Explicit responsive grid (overrides Hextra default for 3-col on lg+). */
-.hextra-cards {
+/* Recent post cards on the homepage (layouts/_partials/recent-posts-cards.html).
+   Frosted glass surface with a subtle border, shadow, and hover lift. */
+.post-cards {
+  display: grid;
   grid-template-columns: 1fr;
+  gap: 1rem;
 }
 
 @media (min-width: 768px) {
-  .hextra-cards {
+  .post-cards {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (min-width: 1024px) {
-  .hextra-cards {
+  .post-cards {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-/* Card internal elements: banner divider, title/date/subtitle theming. */
-.hextra-card .hextra-card-banner {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  padding: 0.75rem 0.75rem 0;
+.post-cards-empty {
+  font-size: 0.875rem;
+  opacity: 0.7;
 }
 
-.hextra-card .hextra-card-banner img {
-  display: block;
+.post-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  color: inherit;
+  text-decoration: none;
+  background-color: rgba(17, 17, 17, 0.5);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.375rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.25);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.post-card:hover {
+  background-color: rgba(17, 17, 17, 0.6);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.35);
+}
+
+.post-card:focus-visible {
+  outline: 2px solid var(--hx-color-primary-600);
+  outline-offset: 2px;
+}
+
+/* Banner: an inset frame that clips the image as it zooms on hover.
+   The 5:2 ratio matches the wide post banners so cards share a height, and contain keeps logos and text in a banner from being cropped. */
+.post-card-banner {
+  padding: 0.75rem 0.75rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.post-card-image {
+  aspect-ratio: 5 / 2;
+  overflow: hidden;
   border-radius: 0.25rem;
 }
 
-.hextra-card .hextra-card-title {
-    font-size: 0.9375rem;
-    line-height: 1.4;
-    color: rgb(51, 65, 85);
+.post-card-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-select: none;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.dark .hextra-card .hextra-card-title {
-    color: rgb(241, 245, 249);
+.post-card:hover .post-card-image img {
+  transform: scale(1.05);
 }
 
-.hextra-card .hextra-card-date {
-    letter-spacing: 0.025em;
-    color: rgb(100, 116, 139);
+.post-card-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 1rem;
 }
 
-.dark .hextra-card .hextra-card-date {
-    color: rgb(180, 194, 214);
+.post-card-title {
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  font-weight: 600;
+  color: rgb(241, 245, 249);
 }
 
-.hextra-card .hextra-card-subtitle {
-    font-size: 0.875rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: rgb(148, 163, 184);
+.post-card:hover .post-card-title {
+  color: var(--hx-color-neutral-50);
 }
 
-.dark .hextra-card .hextra-card-subtitle {
-    color: rgb(203, 213, 225) !important;
+.post-card-date {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  letter-spacing: 0.025em;
+  color: rgb(180, 194, 214);
+}
+
+.post-card-summary {
+  display: -webkit-box;
+  flex: 1;
+  margin-top: 0.5rem;
+  overflow: hidden;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: rgb(203, 213, 225);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+}
+
+/* Blog post banner (layouts/blog/single.html).
+   Bleeds to the screen edges on small screens and becomes a bordered, rounded frame from the md breakpoint. */
+.post-banner {
+  margin: 0 -1.5rem 1.5rem;
+  overflow: hidden;
+  border-block: 1px solid var(--hx-color-gray-800);
+}
+
+.post-banner img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+@media (min-width: 768px) {
+  .post-banner {
+    margin-inline: 0;
+    border: 1px solid var(--hx-color-gray-800);
+    border-radius: 0.5rem;
+  }
 }
 
 /* Mobile hero height reduction. */
@@ -185,61 +264,44 @@ body {
   }
 }
 
-/* Backdrop-filter fallback (~4% browsers).
-   Solid dark surfaces keep text readable when glass effects unavailable.
-   Values aligned with .hextra-card and .home-hero glass for consistency. */
-@supports not (
-  (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))
-) {
+/* Backdrop-filter fallback.
+   Solid dark surfaces keep text readable when glass effects are unavailable. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .home-hero::before {
-    background-color: rgba(10, 10, 10, 0.9) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    background-color: rgba(10, 10, 10, 0.9);
+    border-color: rgba(255, 255, 255, 0.1);
   }
 
-  .hextra-card {
-    background-color: rgba(10, 10, 10, 0.9) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  }
-
-  .dark .hextra-card {
-    background-color: rgba(10, 10, 10, 0.93) !important;
+  .post-card {
+    background-color: rgba(10, 10, 10, 0.93);
+    border-color: rgba(255, 255, 255, 0.1);
   }
 }
 
 /* Reduced transparency preference.
-   Removes blur/saturation; uses higher-opacity dark fills for accessibility.
-   Hero and card surfaces stay visually matched. */
+   Removes blur and saturation and uses higher-opacity dark fills. Hero and card surfaces stay visually matched. */
 @media (prefers-reduced-transparency: reduce) {
   .home-hero::before,
-  .home-hero::after,
-  .hextra-card {
+  .post-card {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
   }
 
   .home-hero::before {
-    background-color: rgba(10, 10, 10, 0.93) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    background-color: rgba(10, 10, 10, 0.93);
+    border-color: rgba(255, 255, 255, 0.1);
   }
 
   .home-hero::after {
     background: rgba(10, 10, 10, 0.6);
   }
 
-  .hextra-card {
-    background-color: rgba(10, 10, 10, 0.93) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  .post-card {
+    background-color: rgba(10, 10, 10, 0.95);
+    border-color: rgba(255, 255, 255, 0.1);
   }
 
-  .dark .hextra-card {
-    background-color: rgba(10, 10, 10, 0.95) !important;
-  }
-
-  .hextra-card:hover {
-    background-color: rgba(10, 10, 10, 0.95) !important;
-  }
-
-  .dark .hextra-card:hover {
-    background-color: rgba(10, 10, 10, 0.98) !important;
+  .post-card:hover {
+    background-color: rgba(10, 10, 10, 0.98);
   }
 }
